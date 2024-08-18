@@ -1,7 +1,11 @@
 #include <stdio.h>
 #include "raylib.h"
 
+#define GRID_SIZE 600
+#define PANEL_SIZE 300
 #define PLAYER_SIZE 40
+#define TILES_ROWS 20
+#define TILES_COLS 20
 
 typedef enum {
     DIR_UP,
@@ -32,16 +36,27 @@ int main() {
         .direction = DIR_UP,
     };
 
-    float dx = 7;
-    float dy = 7;
+    int map[TILES_ROWS][TILES_COLS] = {0};
 
-    InitWindow(800, 600, "Yet Another Rouge Like");
+    InitWindow(GRID_SIZE + PANEL_SIZE, GRID_SIZE, "Yet Another Rouge Like");
     SetTargetFPS(60);
 
     while (!WindowShouldClose()) {
 
         BeginDrawing();
         ClearBackground(GetColor(0x181818FF));
+        DrawRectangle(GetScreenWidth() - PANEL_SIZE, 0, PANEL_SIZE, GetScreenHeight(), GetColor(0x676767FF));
+        DrawText("Player stats", GRID_SIZE + 10, 10, 24, WHITE);
+
+        float tile_width = GRID_SIZE / TILES_COLS;
+        float tile_height = GRID_SIZE / TILES_ROWS;
+        // TODO: magic numbers
+        for (int row = 0; row < TILES_ROWS; row++) {
+            for (int col = 0; col < TILES_ROWS; col++) {
+                Color color = (row + col) % 2 ? DARKGRAY : LIGHTGRAY;
+                DrawRectangle(col * tile_width, row * tile_height, tile_width, tile_height, color);
+            }
+        }
 
         player_draw(&player);
         EndDrawing();
