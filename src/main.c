@@ -27,6 +27,12 @@ void player_draw(Player *player) {
     DrawCircle(player->pos.x + PLAYER_SIZE / 4 * 3, player->pos.y + PLAYER_SIZE / 4, PLAYER_SIZE / 12, BLACK);
 }
 
+void player_draw_stats(Player *player) {
+    ClearBackground(GetColor(0x181818FF));
+    DrawRectangle(GetScreenWidth() - PANEL_SIZE, 0, PANEL_SIZE, GetScreenHeight(), GetColor(0x676767FF));
+    DrawText("Player stats", GRID_SIZE + 10, 10, 24, WHITE);
+}
+
 int main() {
     Player player = {
         .pos = {
@@ -42,15 +48,11 @@ int main() {
     SetTargetFPS(60);
 
     while (!WindowShouldClose()) {
-
         BeginDrawing();
-        ClearBackground(GetColor(0x181818FF));
-        DrawRectangle(GetScreenWidth() - PANEL_SIZE, 0, PANEL_SIZE, GetScreenHeight(), GetColor(0x676767FF));
-        DrawText("Player stats", GRID_SIZE + 10, 10, 24, WHITE);
+        player_draw_stats(&player);
 
         float tile_width = GRID_SIZE / TILES_COLS;
         float tile_height = GRID_SIZE / TILES_ROWS;
-        // TODO: magic numbers
         for (int row = 0; row < TILES_ROWS; row++) {
             for (int col = 0; col < TILES_ROWS; col++) {
                 Color color = (row + col) % 2 ? DARKGRAY : LIGHTGRAY;
