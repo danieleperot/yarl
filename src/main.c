@@ -81,10 +81,24 @@ int main() {
         if (IsKeyPressed(KEY_LEFT_BRACKET) && player.speed > multiplier) player.speed -= multiplier;
         if (IsKeyPressed(KEY_RIGHT_BRACKET) && player.speed < 100) player.speed += multiplier;
 
-        if (IsKeyDown(KEY_UP) && player.pos.y - PLAYER_SIZE / 2 > player.speed) player.pos.y -= player.speed;
-        if (IsKeyDown(KEY_RIGHT) && player.pos.x + player.speed + PLAYER_SIZE / 2 < map.max_cols * map_tile_size) player.pos.x += player.speed;
-        if (IsKeyDown(KEY_DOWN) && player.pos.y + player.speed + PLAYER_SIZE / 2 < map.max_rows * map_tile_size) player.pos.y += player.speed;
-        if (IsKeyDown(KEY_LEFT) && player.pos.x - PLAYER_SIZE / 2 > player.speed) player.pos.x -= player.speed;
+        int max_x = map.max_cols * map_tile_size;
+        int max_y = map.max_rows * map_tile_size;
+        if (IsKeyDown(KEY_UP) && player.pos.y - PLAYER_SIZE / 2 > 0) {
+            if (player.pos.y - PLAYER_SIZE / 2 < player.speed) player.pos.y = PLAYER_SIZE / 2;
+            else player.pos.y -= player.speed;
+        }
+        if (IsKeyDown(KEY_RIGHT) && player.pos.x + PLAYER_SIZE / 2 < max_x) {
+            if (player.pos.x + player.speed + PLAYER_SIZE / 2 > max_x) player.pos.x = max_x - PLAYER_SIZE / 2;
+            else player.pos.x += player.speed;
+        }
+        if (IsKeyDown(KEY_DOWN) && player.pos.y + PLAYER_SIZE / 2 < max_y) {
+            if (player.pos.y + player.speed + PLAYER_SIZE / 2 > max_y) player.pos.y = max_y - PLAYER_SIZE / 2;
+            else player.pos.y += player.speed;
+        }
+        if (IsKeyDown(KEY_LEFT) && player.pos.x - PLAYER_SIZE / 2 > 0) {
+            if (player.pos.x - PLAYER_SIZE / 2 < player.speed) player.pos.x = PLAYER_SIZE / 2;
+            else player.pos.x -= player.speed;
+        }
 
         BeginDrawing();
         ClearBackground(GetColor(0x181818FF));
