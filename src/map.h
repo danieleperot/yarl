@@ -1,7 +1,7 @@
 #ifndef MAP_H
 #define MAP_H
 
-#define MAP_SIZE 20
+#define MAP_SIZE 50
 
 typedef enum {
     TILE_WALL,
