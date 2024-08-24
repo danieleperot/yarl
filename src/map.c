@@ -24,6 +24,7 @@ void generate_map(Map *map) {
 
     int cursor = 0;
     char tile;
+
     while ((tile = fgetc(file)) != EOF) {
         printf("%c", tile);
 
@@ -44,6 +45,9 @@ void generate_map(Map *map) {
 
         cursor ++;
     }
+
+    map->max_rows = MAP_SIZE;
+    map->max_cols = MAP_SIZE;
     
     fclose(file);
 

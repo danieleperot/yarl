@@ -10,6 +10,8 @@ typedef enum {
 
 typedef struct {
     Tile data[MAP_SIZE][MAP_SIZE];
+    int max_rows;
+    int max_cols;
 } Map;
 
 void generate_map(Map *map);

@@ -6,5 +6,5 @@ yarl:
 	gcc src/main.c src/map.c $(CFLAGS) -o build/yarl
 
 run: yarl
-	./build/yarl
+	LD_LIBRARY_PATH=$LD_LIBRARY_PATH:./lib/raylib/lib/ ./build/yarl
 
