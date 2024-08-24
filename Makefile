@@ -3,7 +3,7 @@ CFLAGS= -Wall -Wpedantic \
 		-L lib/raylib/lib -lraylib -I lib/raylib/include
 
 yarl:
-	gcc src/main.c $(CFLAGS) -o build/yarl
+	gcc src/main.c src/map.c $(CFLAGS) -o build/yarl
 
 run: yarl
 	./build/yarl
